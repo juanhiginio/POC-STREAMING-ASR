@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  vosk:
+    image: alphacep/kaldi-es:latest
+    container_name: vosk-es
+    ports:
+      - "2700:2700" # WebSocket de Vosk
+    restart: unless-stopped
+  gateway:
+    build: ./gateway
+    container_name: asr-gateway
+    environment:
+      - VOSK_URL=ws://vosk:2700
+      - DEFAULT_LANG=es-CO
+      - FRAME_MS=20
+      - JITTER_MS=240
+      - DIARIZATION=1
+    depends_on:
+      - vosk
+    ports:
+      - "8080:8080" # HTTP (UI) + WS /stream
+    restart: unless-stopped
