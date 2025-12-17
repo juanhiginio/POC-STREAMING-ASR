@@ -7,7 +7,9 @@ services:
       - "2700:2700" # WebSocket de Vosk
     restart: unless-stopped
   gateway:
-    build: ./gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
     container_name: asr-gateway
     environment:
       - VOSK_URL=ws://vosk:2700
