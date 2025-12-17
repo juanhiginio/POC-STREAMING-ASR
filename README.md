@@ -27,3 +27,5 @@ La estructura del *gateway* separa la conexión **cliente ⇄ gateway** (WS `/st
   de build al usar `docker compose`.
 - Si ves errores relacionados con `COPY` y rutas inexistentes, usa:
   `DOCKER_BUILDKIT=0`.
+
+*** Durante sesiones prolongadas puede aparecer un ConnectionClosedError (1006) en Vosk al finalizar el streaming. Esto corresponde a un cierre abrupto del WebSocket por parte del cliente y no afecta el funcionamiento ni la validez de la POC.***
